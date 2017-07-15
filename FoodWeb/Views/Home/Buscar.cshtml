@@ -69,11 +69,14 @@
             @foreach (var item in Model)
                {
 
+                var imagen = @item.ProductoImagen.FirstOrDefault();
+                string img = imagen == null ? "no_disponible.jpg" : imagen.Imagen;
+
                     <div class="col-sm-4">
                         <div class="product-image-wrapper">
                             <div class="single-products">
                                 <div class="productinfo text-center">
-                                    <img src="~/images/shop/product12.jpg" alt="" />
+                                    <img src="~/images/ImgProductos/@img" alt="" />
                                     <h2>S/. @item.Precio</h2>
                                     <p>@item.Denominacion</p>
                                     <a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Agregar al Carrito</a>

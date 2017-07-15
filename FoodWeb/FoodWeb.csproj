@@ -213,6 +213,7 @@
     <Content Include="js\contact.js" />
     <Content Include="js\gmaps.js" />
     <Content Include="js\html5shiv.js" />
+    <Content Include="js\jquery.form.min.js" />
     <Content Include="js\jquery.js" />
     <Content Include="js\jquery.prettyPhoto.js" />
     <Content Include="js\jquery.scrollUp.min.js" />
@@ -230,6 +231,7 @@
     </Content>
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
+    <Content Include="Areas\Admin\Views\Producto\Adjuntos.cshtml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
@@ -240,6 +242,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Areas\Admin\AdminAreaRegistration.cs" />
     <Compile Include="Areas\Admin\Controllers\ProductoController.cs" />
+    <Compile Include="Areas\Admin\Models\ResponseModel.cs" />
     <Compile Include="Controllers\ComprarController.cs" />
     <Compile Include="Controllers\DetalleController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -317,7 +320,8 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Areas\Admin\Models\" />
+    <Folder Include="Areas\Admin\Views\ResponseModel\" />
+    <Folder Include="images\ImgProductos\" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />

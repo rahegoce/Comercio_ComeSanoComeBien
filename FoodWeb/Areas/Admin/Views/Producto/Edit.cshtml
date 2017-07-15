@@ -5,11 +5,12 @@
 }
 
 <h2>Edit</h2>
-
+<div class="row">
+    <div class="col-md-6">
 @using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
-    
+
     <div class="form-horizontal">
         <h4>Producto</h4>
         <hr />
@@ -69,3 +70,82 @@
 <div>
     @Html.ActionLink("Back to List", "Index")
 </div>
+    </div>
+
+    <div class="col-md-6">
+        @if (Model.ProductoId > 0)
+        {
+            using (Html.BeginForm("Adjuntar", "Producto", FormMethod.Post, new { id = "frm-adjuntar" }))
+            {
+                <input type="hidden" name="ProductoId" value="@Model.ProductoId" />
+                    <div class="row">
+                        <div class="col-xs-10">
+                            <div class="form-group">
+                                <input type="file" name="documento" accept="image/x-png, image/gif, image/jpeg" @*accept="image/*"*@ />
+                            </div>
+                        </div>
+                        <div class="col-xs-2">
+                            <button type="submit" class="btn btn-primary btn-block">Adjuntar</button>
+                        </div>
+                    </div>
+            }
+            <div id="adjuntos-cargados"></div>
+        }
+
+    </div>    
+</div>
+
+@section scripts{
+    <script>
+        $(document).ready(function () {
+            @if (Model.ProductoId > 0)
+            {
+                <text>
+                CargarAdjuntos();
+                </text>
+            }
+
+            $("#frm-adjuntar").submit(function () {
+                var form = $(this);
+
+                form.ajaxSubmit({
+                    dataType: 'JSON',
+                    type: 'POST',
+                    url: form.attr('action'),
+                    success: function (r) {
+                        if (r.respuesta) {
+                            CargarAdjuntos();
+                        }
+                        else {alert(r.error);}
+                    },
+                    error: function (jqXHR, textStatus, errorThrown) {
+                        alert(errorThrown);
+                    }
+                });
+                return false;
+            })
+        });
+
+        function CargarAdjuntos() {
+            $("#adjuntos-cargados").load("@Url.Content("~/Admin/Producto/adjuntos?ProductoId=" + Model.ProductoId)");
+        }
+
+        function EliminarImagen(ImagenId) {
+            $.ajax({
+                data: { ProductoImagenId: ImagenId },
+                url: '@Url.Action("EliminarImagen","Producto")',
+                type: 'post',
+                success: function (r) {
+                    if (r.respuesta) {
+                        CargarAdjuntos();
+                    }
+                    else
+                        alert(r.error);
+                },
+                error: function (jqXHR, textStatus, errorThrown) { alert(errorThrown); }
+            });
+        }
+
+
+    </script>
+    }
