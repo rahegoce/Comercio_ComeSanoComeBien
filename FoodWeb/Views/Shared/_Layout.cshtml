@@ -230,5 +230,73 @@
     <script src="~/js/price-range.js"></script>
     <script src="~/js/jquery.prettyPhoto.js"></script>
     <script src="~/js/main.js"></script>
+    <script>
+        $(function () {
+            var carrito = localStorage.getItem("carrito");
+            var productos = [];
+            if (carrito != null) {
+                productos = JSON.parse(carrito);
+                CargaCarrito(productos);
+            }
+        });
+
+        function CargaCarrito(productos) {
+            var html = '';
+            var total = 0;
+
+            $("#nroProductosCarrito").text('(' + productos.length + ')');
+
+            $.each(productos, function () {
+                total += this.Precio * this.Cantidad
+                html += '<div class="item-in-cart clearfix">' +
+                       '    <div class="image">' +
+                '             <img src="/images/ImgProductos/' + this.Imagen + '"  width="124" height="124" alt="cart item" />' +
+                '           </div>' +
+                '           <div class="desc">' +
+                '                 <strong><a href="product.html">' + this.Denominacion + '</a></strong>' +
+                '                <span class="light-clr qty">Qty: ' + this.Cantidad + ' &nbsp;' +
+                '                       <a href="#" class="icon-remove-sign" title="Remove Item"></a>' +
+                '                    </span>' +
+                '                </div>' +
+                '                <div class="price">' +
+                '                   <strong>S/. ' + this.Precio + '</strong>' +
+                '               </div>' +
+                '           </div>';
+            });
+            $('#itemcarrito').html(html);
+
+            $("#totalCompraCarrito,#totalCarrito").text('S/.' + total);
+
+        }
+
+        function AgregarCarrito(productoid, denominacion, imagen, precio) {
+            var carrito = localStorage.getItem("carrito");
+            var productos = [];
+            if (carrito != null) {
+                productos = JSON.parse(carrito);
+            }
+
+            var itemActual;
+            for (var i = 0; i < productos.length; i++) {
+                if (productos[i].ProductoId == productoid) {
+                    itemActual = productos[i];
+                }
+            }
+
+            if (!itemActual) {
+                productos.push({ ProductoId: productoid, Denominacion: denominacion, Precio: precio, Cantidad: 1, Imagen: imagen });
+            } else {
+                itemActual.Cantidad++;
+            }
+
+            var jsonStr = JSON.stringify(productos);
+            localStorage.setItem("carrito", jsonStr);
+
+            CargaCarrito(productos);
+
+        }
+
+    </script>
+
 </body>
 </html>

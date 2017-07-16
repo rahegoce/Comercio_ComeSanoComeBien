@@ -79,7 +79,7 @@
                                     <img src="~/images/ImgProductos/@img" alt="" />
                                     <h2>S/. @item.Precio</h2>
                                     <p>@item.Denominacion</p>
-                                    <a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Agregar al Carrito</a>
+                                    <a onclick="AgregarCarrito(@item.ProductoId,'@item.Denominacion','@img',@item.Precio)" href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Agregar al Carrito</a>
                                 </div>                                
                             </div>
                             <div class="choose">
