@@ -22,11 +22,11 @@
                 <tbody id="itemcarrito"></tbody>
                 <tr>
                 		<td></td><td></td>
-                         <td class="stronger">Total:</td>
-                         <td class="stronger"><div id="totalCompra" class="size-16 align-right">0.00</div></td>
                         <td class="cart_delete">
-                            <a class="cart_quantity_delete" href=""><i class="fa fa-times"></i></a>
+                            <a id="btnEliminar" class="cart_quantity_delete" href=""><i class="fa fa-times"></i></a>
                         </td>
+                         <td class="stronger">Total:</td>
+                         <td class="stronger"><div id="totalCompra" class="size-16 align-right">0.00</div></td>                        
                 </tr>
 
             </table>
@@ -37,19 +37,15 @@
     <div class="container">
         <div class="heading">
             <h3>Vayamos al siguiente paso:</h3>
-            <p>Vea si tiene un código de descuento o puntos de recompensa que desea utilizar, o si desea estimar el costo de envío.</p>
+            <p>Donde deseas que se haga el envío.</p>
         </div>
         <div class="row">
             <div class="col-sm-6">
                 <div class="chose_area">
-                    <ul class="user_option">
+                    <ul class="user_option">                       
                         <li>
                             <input type="checkbox">
-                            <label>Usar Código de Cupon</label>
-                        </li>
-                        <li>
-                            <input type="checkbox">
-                            <label>Usar Vale de Regalo</label>
+                            <label>Usar Vale de Descuento</label>
                         </li>
                         <li>
                             <input type="checkbox">
@@ -61,10 +57,7 @@
                             <label>Provincia:</label>
                             <select>
                                 <option>Huamanga</option>
-                                <option>Huanta</option>
-                                <option>La Mar</option>
-                                <option>Vilcashuaman</option>
-                                <option>Cangallo</option>                                
+                                <option>Huanta</option>                                                                
                             </select>
 
                         </li>
@@ -81,24 +74,14 @@
 
                         </li>
                         <li class="single_field zip-field">
-                            <label>Código Postal:</label>
+                            <label>Dirección:</label>
                             <input type="text">
                         </li>
-                    </ul>                    
-                    <a class="btn btn-default check_out" href="">Actualizar</a>
-                </div>
-            </div>
-            <div class="col-sm-6">
-                <div class="total_area">
-                    <ul>
-                        <li>Sub Total <span>S/. 50.00</span></li>
-                        <li>IGV 18%<span>S/. 9.00</span></li>
-                        <li>Costo de Envío <span>S/. 10.00</span></li>
-                        <li>Total <span>S/. 69.00</span></li>
                     </ul>                    
                     <a class="btn btn-default check_out" href="@Url.Action("Confirmar","Comprar")">Continuar</a>
                 </div>
             </div>
+            
         </div>
     </div>
 </section><!--/#do_action-->
@@ -111,6 +94,11 @@
                 productos = JSON.parse(carrito);
                 CargarProductos(productos);
             }
+
+            $("#btnEliminar").click(function () {
+                servicio.carrito.splice(servicio.carrito.indexOf(item), 1);
+                localStorage.setItem("carrito", JSON.stringify(servicio.carrito));
+            });
         });
         function CargarProductos(productos) {
             var html = '';
@@ -131,5 +119,10 @@
 
             $("#totalCompra").text('S/.' + total);
         }
+
+        $scope.eliminar = function (item) {
+            servicio.carrito.splice(servicio.carrito.indexOf(item), 1);
+            localStorage.setItem("carrito", JSON.stringify(servicio.carrito));
+        };
 </script>
 

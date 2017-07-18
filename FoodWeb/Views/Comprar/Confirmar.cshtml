@@ -2,19 +2,12 @@
 <section id="cart_items">
     <div class="container">
         <div class="breadcrumbs">
-            <ol class="breadcrumb">
-                <li><a href="#">Home</a></li>
-                <li class="active">Verificar</li>
+            <ol class="breadcrumb">                
+                <li class="active"><h2>Verificar y Confirmar</h2></li>
             </ol>
-        </div><!--/breadcrums-->
-        <div class="step-one">
-            <h2 class="heading">Paso: Confirmar Compra</h2>
-        </div>
+        </div><!--/breadcrums-->        
         <!--/checkout-options-->
-        <!--/register-req-->
-        <div class="review-payment">
-            <h2>Revisar y Comprar</h2>
-        </div>
+        <!--/register-req-->        
         <div class="table-responsive cart_info">
             <table class="table table-condensed">
                 <thead>
@@ -40,20 +33,20 @@
                         <td colspan="2">
                             <table class="table table-condensed total-result">
                                 <tr>
-                                    <td>Cart Sub Total</td>
-                                    <td>$59</td>
+                                    <td>Sub Total</td>
+                                    <td>S/. 0.00</td>
                                 </tr>
                                 <tr>
-                                    <td>Exo Tax</td>
-                                    <td>$2</td>
+                                    <td>IGV 18%</td>
+                                    <td>S/. 0.00</td>
                                 </tr>
                                 <tr class="shipping-cost">
-                                    <td>Shipping Cost</td>
-                                    <td>Free</td>
+                                    <td>Costo de Envío</td>
+                                    <td>S/. 10.00</td>
                                 </tr>
                                 <tr>
                                     <td>Total</td>
-                                    <td><span>$61</span></td>
+                                    <td><span>S/. 0.00</span></td>
                                 </tr>
                             </table>
                         </td>
@@ -67,69 +60,76 @@
                 
                 <div class="col-sm-5 clearfix">
                     <div class="bill-to">
-                        <p>Bill To</p>
+                        <p>Información de Cliente y Forma de Pago</p>
                         <div class="form-one">
                             <form>
-                                <input type="text" placeholder="Company Name">
-                                <input type="text" placeholder="Email*">
-                                <input type="text" placeholder="Title">
-                                <input type="text" placeholder="First Name *">
-                                <input type="text" placeholder="Middle Name">
-                                <input type="text" placeholder="Last Name *">
-                                <input type="text" placeholder="Address 1 *">
-                                <input type="text" placeholder="Address 2">
+                                <input type="text" placeholder="Nombres *">                                
+                                <input type="text" placeholder="Apellidos *">
+                                <input type="text" placeholder="Telefono *">
+                                <input type="text" placeholder="Email *">                                                                
+                                <input type="text" placeholder="Dirección *">                                
                             </form>
                         </div>
                         <div class="form-two">
-                            <form>
-                                <input type="text" placeholder="Zip / Postal Code *">
+                            <form>                                
                                 <select>
-                                    <option>-- Country --</option>
-                                    <option>United States</option>
-                                    <option>Bangladesh</option>
-                                    <option>UK</option>
-                                    <option>India</option>
-                                    <option>Pakistan</option>
-                                    <option>Ucrane</option>
-                                    <option>Canada</option>
-                                    <option>Dubai</option>
+                                    <option>-- Tipo de Pago --</option>
+                                    <option>Tarjeta de Crédito</option>
+                                    <option>Deposito a Cuenta</option>
+                                    <option>Contra Entrega</option>                                    
                                 </select>
                                 <select>
-                                    <option>-- State / Province / Region --</option>
-                                    <option>United States</option>
-                                    <option>Bangladesh</option>
-                                    <option>UK</option>
-                                    <option>India</option>
-                                    <option>Pakistan</option>
-                                    <option>Ucrane</option>
-                                    <option>Canada</option>
-                                    <option>Dubai</option>
+                                    <option>-- Tipo de Tarjeta --</option>
+                                    <option>Visa</option>
+                                    <option>MasterCard</option>                                    
                                 </select>
-                                <input type="password" placeholder="Confirm password">
-                                <input type="text" placeholder="Phone *">
-                                <input type="text" placeholder="Mobile Phone">
-                                <input type="text" placeholder="Fax">
+                                <input type="password" placeholder="Número de Tarjeta *">
+                                <input type="text" placeholder="CVV o CVC *">  
+                                <p>Fecha de Expiración</p>                              
+                                <div class="controls">
+                                    <select id="exp" class="input-small month-push-right">
+                                        <option value="-1" />-- Mes --
+                                        <option value="1" />01
+                                        <option value="2" />02
+                                        <option value="3" />03
+                                        <option value="4" />04
+                                        <option value="5" />05
+                                        <option value="6" />06
+                                        <option value="7" />07
+                                        <option value="8" />08
+                                        <option value="9" />09
+                                        <option value="10" />10
+                                        <option value="11" />11
+                                        <option value="12" />12
+                                    </select>
+                                    <p> </p>
+                                    <select id="exp" class="input-small">
+                                        <option value="-1" />-- Año --
+                                        <option value="2013" />2017
+                                        <option value="2014" />2018
+                                        <option value="2015" />2019
+                                        <option value="2016" />2020
+                                        <option value="2017" />2021
+                                        <option value="2018" />2022
+                                        <option value="2019" />2023
+
+                                    </select>
+                                </div>
                             </form>
                         </div>
                     </div>
                 </div>
                 <div class="col-sm-4">
                     <div class="order-message">
-                        <p>Shipping Order</p>
-                        <textarea name="message" placeholder="Notes about your order, Special Notes for Delivery" rows="16"></textarea>
-                        <label><input type="checkbox"> Shipping to bill address</label>
+                        <p>Orden de Envío</p>
+                        <textarea name="message" placeholder="Puede agregar alguna nota para el envío de su pedido." rows="16"></textarea>
+                        <label><input type="checkbox"> Enviar Factura a la Dirección</label>
                     </div>
                 </div>
                 <div class="col-sm-3">
                     <div class="shopper-info">
-                        <p>Shopper Information</p>
-                        <form>
-                            <input type="text" placeholder="Display Name">
-                            <input type="text" placeholder="User Name">
-                            <input type="password" placeholder="Password">
-                            <input type="password" placeholder="Confirm password">
-                        </form>                        
-                        <a id="btnConfirmar" class="btn btn-primary" href="#">Confirmar</a>
+                        <p>Confirmar Compra</p>                                               
+                        <a id="btnConfirmar" class="btn btn-primary" href="#">Confirmar y Pagar</a>
                     </div>
                 </div>
             </div>
@@ -146,6 +146,7 @@
                 productos = JSON.parse(carrito);
                 CargarProductos(productos);
             }
+            });
             $("#btnConfirmar").click(function () {
                 $.ajax({
                     type: 'POST',
@@ -159,7 +160,7 @@
                     }
                 });
             });
-        });
+        
         function CargarProductos(productos) {
             var html = '';
             var total = 0;
