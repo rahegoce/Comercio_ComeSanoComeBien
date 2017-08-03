@@ -8,6 +8,8 @@ namespace FoodWeb.Controllers
 {
     public class ComprarController : Controller
     {
+
+        private Models.TiendaEntities1 bd = new Models.TiendaEntities1();
         // GET: Comprar
         public ActionResult Compra()
         {
@@ -16,17 +18,42 @@ namespace FoodWeb.Controllers
 
         public ActionResult Confirmar()
         {
-            return View();
+            var cliente = bd.Cliente.Find(Helper.SessionHelper.GetUser());
+            return View(cliente);
         }
 
         [HttpPost]
-        public JsonResult RealizarPedido(List<Pedido> p)
+        public JsonResult RealizarPedido(List<Pedidos> p)
         {
+            var clienteid = Helper.SessionHelper.GetUser();
+            var pcab = new Models.Pedido
+            {
+                ClienteId = clienteid,
+                Estado = "P",
+                Fecha = DateTime.Now
+            };
+
+            bd.Pedido.Add(pcab);
+            bd.SaveChanges();
+
+
+            foreach (var item in p)
+            {
+                var pdet = new Models.PedidoDetalle
+                {
+                    PedidoId = pcab.PedidoId,
+                    Cantidad = item.Cantidad,
+                    ProductoId = item.ProductoId
+                };
+                bd.PedidoDetalle.Add(pdet);
+                bd.SaveChanges();
+            }
+
 
             return Json(true, JsonRequestBehavior.AllowGet);
         }
 
-        public class Pedido
+        public class Pedidos
         {
             public int ProductoId { get; set; }
             public string Denominacion { get; set; }

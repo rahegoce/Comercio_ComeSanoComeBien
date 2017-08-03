@@ -64,7 +64,7 @@
                         <li class="single_field">
                             <label>Distrito:</label>
                             <select>
-                                <option>Select</option>
+                                <option>Seleccionar</option>
                                 <option>Ayacucho</option>
                                 <option>Andres A. Cáceres</option>
                                 <option>Carmen Alto</option>
@@ -78,7 +78,18 @@
                             <input type="text">
                         </li>
                     </ul>                    
-                    <a class="btn btn-default check_out" href="@Url.Action("Confirmar","Comprar")">Continuar</a>
+                    <div class="proceed">
+                        @if (HttpContext.Current.User.Identity.IsAuthenticated)
+                        {
+                            <a href="@Url.Action("Confirmar","Compra")" class="btn btn-danger pull-right bold higher">Continuar</a>
+                        }
+                        else
+                        {
+                            <a href="#loginModal" role="button" data-toggle="modal" class="btn btn-danger pull-right bold higher">Continuar</a>
+                        }
+                        <small>Los costos de envío se calculan por su destino. <a href="#">Más Información</a></small>
+                    </div>
+
                 </div>
             </div>
             

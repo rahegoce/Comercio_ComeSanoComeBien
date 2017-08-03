@@ -1,4 +1,6 @@
 ﻿
+@model FoodWeb.Models.Cliente
+
 <section id="cart_items">
     <div class="container">
         <div class="breadcrumbs">
@@ -65,8 +67,8 @@
                             <form>
                                 <input type="text" placeholder="Nombres *">                                
                                 <input type="text" placeholder="Apellidos *">
-                                <input type="text" placeholder="Telefono *">
-                                <input type="text" placeholder="Email *">                                                                
+                                <input type="email" placeholder="Email *">
+                                <input type="text" placeholder="Celular *">                                                                
                                 <input type="text" placeholder="Dirección *">                                
                             </form>
                         </div>
@@ -146,13 +148,13 @@
                 productos = JSON.parse(carrito);
                 CargarProductos(productos);
             }
-            });
+            
             $("#btnConfirmar").click(function () {
                 $.ajax({
                     type: 'POST',
                     dataType: 'json',
                     contentType: "application/json; charset=utf-8",
-                    url: '@Url.Action("RealizarPedido","Compra")',
+                    url: '@Url.Action("RealizarPedido","Comprar")',
                     data: carrito,
                     success: function () {
                         localStorage.removeItem("carrito");
@@ -160,7 +162,7 @@
                     }
                 });
             });
-        
+        });
         function CargarProductos(productos) {
             var html = '';
             var total = 0;
