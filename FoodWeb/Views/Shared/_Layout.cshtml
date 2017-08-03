@@ -85,14 +85,27 @@
                     <div class="col-sm-8">
                         <div class="shop-menu pull-right">
                             <ul class="nav navbar-nav">
-                                <li><a href="#"><i class="fa fa-user"></i> Cuenta</a></li>                                
-                                <li><a href="#"><i class="fa fa-crosshairs"></i> Verificar</a></li>
-                                <li><a href="@Url.Action("Compra","Comprar")"><i class="fa fa-shopping-cart"></i> Carrito</a></li>
-                                <li><a href="@Url.Action("Login","Home")"><i class="fa fa-lock"></i> Logueo</a></li>
+                                <li><a href="#"><i class="fa fa-user"></i> Cuenta</a></li>                               
+                                <li><a href="@Url.Action("Compra","Comprar")"><i class="fa fa-shopping-cart"></i> Carrito</a></li>                                
                             </ul>
-                        </div>
-                    </div>
-                </div>
+                            <div>
+                                @if (!HttpContext.Current.User.Identity.IsAuthenticated)
+                                {
+                                    <a href="#loginModal" role="button" data-toggle="modal">Iniciar Sesión</a>
+                                    <text> o </text>
+                                    <a href="#registerModal" role="button" data-toggle="modal">Registrarse</a>
+                                }
+                                else
+                                {
+                                    <a href="#">Hola @FoodWeb.Controllers.HomeController.ObtenerNombreUsuario()</a>
+                                    <text> o </text>
+                                    <a href="@Url.Action("Logout", "Home" )"> Cerrar Sesion </a>
+                                }
+
+                            </div>
+                        </div>                        
+                    </div>                                        
+                </div>                
             </div>
         </div><!--/header-middle-->
 
@@ -117,8 +130,7 @@
                                     <ul role="menu" class="sub-menu">
                                         <li><a href="@Url.Action("Buscar","Home")">Productos</a></li>                                        
                                         <li><a href="#">Verificar</a></li>
-                                        <li><a href="@Url.Action("Compra","Comprar")">Carrito</a></li>
-                                        <li><a href="@Url.Action("Login","Home")">Logueo</a></li>
+                                        <li><a href="@Url.Action("Compra","Comprar")">Carrito</a></li>                                        
                                     </ul>
                                 </li>                                                     
                                 <li><a href="#">Contactanos</a></li>
@@ -142,6 +154,98 @@
             </div>
         </div><!--/header-bottom-->
     </header><!--/header-->
+
+    <!--  ==========  -->
+    <!--  = Modal Windows =  -->
+    <!--  ==========  -->
+    <!--  = Login =  -->
+    <div id="loginModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="loginModalLabel" aria-hidden="true">
+        <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+            <h3 id="loginModalLabel"><span class="light">Iniciar</span> Sesión</h3>
+        </div>
+        <div class="modal-body">
+            <form method="post" action="@Url.Action("Login","Home")">
+                <div class="control-group">
+                    <div class="controls">
+                        <input type="text" class="input-block-level" name="usuario" placeholder="Usuario" />
+                    </div>
+                </div>
+                <div class="control-group">
+                    <div class="controls">
+                        <input type="password" class="input-block-level" name="clave" placeholder="Contraseña" />
+                    </div>
+                </div>
+                <div class="control-group">
+                    <div class="controls">
+                        <label class="checkbox">
+                            <input type="checkbox" />
+                            Recordar mi Cuenta
+                        </label>
+                    </div>
+                </div>
+                <button type="submit" class="btn btn-primary input-block-level bold higher">
+                    Iniciar Sesión
+                </button>
+            </form>
+            <p class="center-align push-down-0">
+                <a href="#" data-dismiss="modal">¿Olvidaste tu Contraseña?</a>
+            </p>
+        </div>
+    </div>
+
+    <!--  = Register =  -->
+    <div id="registerModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="registerModalLabel" aria-hidden="true">
+        <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+            <h3 id="registerModalLabel"><span class="light">Registrate</span> con Nosotros</h3>
+        </div>
+ 
+        <form method="post" action="@Url.Action("RegistrarCliente","Home")">
+            <div class="control-group">
+                <div class="controls">
+                    <input type="text" class="input-block-level" name="Nombres" placeholder="Nombres" />
+                </div>
+            </div>
+            <div class="control-group">
+                <div class="controls">
+                    <input type="text" class="input-block-level" name="Apellidos" placeholder="Apellidos" />
+                </div>
+            </div>
+            <div class="control-group">
+                <div class="controls">
+                    <input type="text" class="input-block-level" name="Usuario" placeholder="Usuario" />
+                </div>
+            </div>
+            <div class="control-group">
+                <div class="controls">
+                    <input type="password" class="input-block-level" name="Clave" placeholder="Contraseña" />
+                </div>
+            </div>
+            <div class="control-group">
+                <div class="controls">
+                    <input type="email" class="input-block-level" name="Correo" placeholder="Email" />
+                </div>
+            </div>
+            <div class="control-group">
+                <div class="controls">
+                    <input type="text" class="input-block-level" name="Celular" placeholder="Celular" />
+                </div>
+            </div>
+            <div class="control-group">
+                <div class="controls">
+                    <input type="text" class="input-block-level" name="Direccion" placeholder="Dirección" />
+                </div>
+            </div>
+            <button type="submit" class="btn btn-danger input-block-level bold higher">
+                REGISTRARSE
+            </button>
+        </form>
+        <p class="center-align push-down-0">
+            <a data-toggle="modal" role="button" href="#loginModal" data-dismiss="modal">¿Ya estás Registrado?</a>
+        </p>
+    </div>
+
 
     @RenderBody()
 
