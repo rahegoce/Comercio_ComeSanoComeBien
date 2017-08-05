@@ -218,6 +218,7 @@
     <Content Include="js\jquery.prettyPhoto.js" />
     <Content Include="js\jquery.scrollUp.min.js" />
     <Content Include="js\main.js" />
+    <Content Include="js\materialize.min.js" />
     <Content Include="js\price-range.js" />
     <Content Include="Models\ModelTienda.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>

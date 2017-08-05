@@ -334,6 +334,7 @@
     <script src="~/js/price-range.js"></script>
     <script src="~/js/jquery.prettyPhoto.js"></script>
     <script src="~/js/main.js"></script>
+    <script src="~/js/materialize.min.js"></script>
     <script>
         $(function () {
             var carrito = localStorage.getItem("carrito");
@@ -342,7 +343,21 @@
                 productos = JSON.parse(carrito);
                 CargaCarrito(productos);
             }
+            $("#btnConfirmar").click(function () {
+                $.ajax({
+                    type: 'POST',
+                    dataType: 'json',
+                    contentType: "application/json; charset=utf-8",
+                    url: '@Url.Action("RealizarPedido","Comprar")',
+                    data: carrito,
+                    success: function () {
+                        localStorage.removeItem("carrito");
+                        window.location = '@Url.Action("Index","Home")';
+                    }
+                });
+            });
         });
+      
 
         function CargaCarrito(productos) {
             var html = '';
@@ -399,6 +414,7 @@
             CargaCarrito(productos);
 
         }
+
 
     </script>
 

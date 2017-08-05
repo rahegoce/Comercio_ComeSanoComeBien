@@ -21,12 +21,10 @@
                 </thead>
                 <tbody id="itemcarrito"></tbody>
                 <tr>
-                		<td></td><td></td>
-                        <td class="cart_delete">
-                            <a id="btnEliminar" class="cart_quantity_delete" href=""><i class="fa fa-times"></i></a>
-                        </td>
-                         <td class="stronger">Total:</td>
-                         <td class="stronger"><div id="totalCompra" class="size-16 align-right">0.00</div></td>                        
+                    <td></td>
+                    <td></td>
+                    <td class="stronger">Total:</td>
+                    <td class="stronger"><div id="totalCompra" class="size-16 align-right">0.00</div></td>
                 </tr>
 
             </table>
@@ -96,44 +94,3 @@
         </div>
     </div>
 </section><!--/#do_action-->
-
-<script>
-        $(function () {
-            var carrito = localStorage.getItem("carrito");
-            var productos = [];
-            if (carrito != null) {
-                productos = JSON.parse(carrito);
-                CargarProductos(productos);
-            }
-
-            $("#btnEliminar").click(function () {
-                servicio.carrito.splice(servicio.carrito.indexOf(item), 1);
-                localStorage.setItem("carrito", JSON.stringify(servicio.carrito));
-            });
-        });
-        function CargarProductos(productos) {
-            var html = '';
-            var total = 0;
-
-            $.each(productos, function () {
-                total += this.Precio * this.Cantidad
-                html += '<tr>' +
-                '            <td class="image"><img src="images/ImgProductos/' + this.Imagen + '" alt="" width="124" height="124" /></td>' +
-                '            <td class="desc">' + this.Denominacion + ' &nbsp; <a title="Remove Item" class="icon-remove-sign" href="#"></a></td>' +
-                '            <td class="qty">' +
-                '                <input type="text" class="tiny-size" value="' + this.Cantidad + '" />' +
-                '           </td>' +
-                '           <td class="price">S/. ' + this.Precio + '</td>' +
-                '          </tr>'
-            });
-            $('#itemcarrito').html(html);
-
-            $("#totalCompra").text('S/.' + total);
-        }
-
-        $scope.eliminar = function (item) {
-            servicio.carrito.splice(servicio.carrito.indexOf(item), 1);
-            localStorage.setItem("carrito", JSON.stringify(servicio.carrito));
-        };
-</script>
-
